@@ -79,9 +79,62 @@ function encode(val, prev){
     // }
 }
 
+var specialArea = {
+  '美国': {
+    Alaska: {              // 把阿拉斯加移到美国主大陆左下方
+      left: -131,
+      top: 25,
+      width: 15
+    },
+    Hawaii: {
+      left: -110,        // 夏威夷
+      top: 28,
+      width: 5
+    },
+    'Puerto Rico': {       // 波多黎各
+      left: -76,
+      top: 26,
+      width: 2
+    }
+  },
+  '法国': {
+    'Guadeloupe': {
+      left: -4.8,
+      top: 37,
+      width: 1
+    },
+    'Martinique': {
+      left: -1,
+      top: 37,
+      width: 1
+    },
+    'French Guiana': {
+      left: 3.2,
+      top: 37,
+      width: 2
+    },
+    'Mayotte': {
+      left: 9,
+      top: 37,
+      width: 1
+    },
+    'Réunion': {
+      left: 11,
+      top: 37,
+      width: 1.5
+    }
+  }
+};
+
+
 // 不压缩，下载地图文件
 function makeJs(geojson, mapName) {
 
+  var specialAreaArrangements = "";
+  if (mapName in specialArea){
+    var arrangement = specialArea[mapName];
+    specialAreaArrangements = "," + JSON.stringify(arrangement);
+  }
   return "(function (root, factory) {"
     + "if (typeof define === 'function' && define.amd) {"
     +     "define(['exports', 'echarts'], factory);"
@@ -106,7 +159,7 @@ function makeJs(geojson, mapName) {
     +     "return;"
     + "}"
     + "echarts.registerMap('" + mapName + "', "
-    + JSON.stringify(geojson) + ");}));";
+    + JSON.stringify(geojson) + specialAreaArrangements +");}));";
 
 }
 

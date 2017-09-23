@@ -10,7 +10,9 @@ var geoJsonToCompressedJs = (jsonFile, jsFile, registryName) => {
 
     var geojson = JSON.parse(data);
 
-    mapTool.compress(geojson);
+    if(!geojson.UTF8Encoding){
+      mapTool.compress(geojson);
+    }
     fs.writeFile(jsFile, mapTool.makeJs(geojson, registryName), function(err){
       if (err) throw err;
     });
