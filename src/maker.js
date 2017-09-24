@@ -3,7 +3,6 @@ const mapTool = require('./map-tool');
 
 
 var geoJsonToCompressedJs = (jsonFile, jsFile, registryName) => {
-  console.log(jsFile);
 
   fs.readFile(jsonFile, 'utf8', function (err, data) {
     if(err) throw err;
