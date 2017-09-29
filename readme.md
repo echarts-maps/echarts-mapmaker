@@ -23,6 +23,22 @@ Example commands
 
 compress [world.json](https://github.com/ecomfe/echarts/blob/master/map/json/world.json) world.js world
 
+### property
+
+Manage the property of a geojson file.
+
+```
+Usage: property [options] <geojson>
+
+
+Options:
+
+  -l, --list                                      list all properties in each feature
+  -r, --rename <oldname,newname>                  rename a property
+  -m, --merge <propertya,propertyb,new property>  merge two property
+  -h, --help                                      output usage information
+```
+
 ## License
 
 MIT

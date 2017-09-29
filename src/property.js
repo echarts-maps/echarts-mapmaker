@@ -7,7 +7,7 @@ program
   .arguments('<geojson>')
   .option('-l, --list', 'list all properties in each feature')
   .option('-r, --rename <oldname,newname>', 'rename a property')
-  .option('-m, --merge <propertya,propertyb,new property', 'merge two property')
+  .option('-m, --merge <propertya,propertyb,new property>', 'merge two property')
   .action(function(geojson){
     if(program.list){
       maker.inspect(geojson);

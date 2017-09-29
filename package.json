@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "compress": "./src/compress.js"
+    "compress": "./src/compress.js",
+    "property": "./src/property.js"
   },
   "repository": {
     "type": "git",
