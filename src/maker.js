@@ -2,7 +2,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const mapTool = require('./map-tool');
-
+const parser = require('./parseGeoJson');
 
 var geoJsonToCompressedJs = (jsonFile, jsFile, registryName) => {
 
@@ -74,10 +74,66 @@ var geoJsonMergeTwoPropertiesAsOne = (jsonFile, propertyA, propertyB, newPropert
   });
 };
 
+//geojson对象
+function Geojson() {
+    this.type  = "FeatureCollection";
+    this.features =[];
+}
+
+function jsToGeoJson(jsFile, outputGeoJsonFile){
+/*
+  var fakeEcharts = () => {
+    var map;
+    function fakeRegister(_, geojson){
+      map = geojson;
+    };
+
+    function getMap(){
+      return map;
+    }
+
+    return {
+      registerMap: fakeRegister,
+      getGeoJson: getMap
+    }
+  }
+  global.echarts = fakeEcharts();
+  const module = require(jsFile);
+  console.log(module);
+  console.log(jsFile);
+  console.log(global.echarts);*/
+
+  fs.readFile(jsFile, 'utf8', function(err, data) {
+    if(err) throw err;
+    const regx = /registerMap\(\".*?\"\,/;
+    const suffix = ");}));";
+    var tokens = data.split(regx);
+    if(tokens.length !== 2){
+      throw new Error('Invalid js file.')
+    }
+    const heading = tokens[0];
+    var jsContent = tokens[1];
+    if(heading.indexOf('!function(A,B)') !== -1){
+      const endregx = /\)\:void D/;
+      var subtokens = jsContent.split(endregx);
+      jsContent = subtokens[0];
+    }else{
+      throw new Error('Cannot handle js file');
+    }
+
+    eval('var encodedGeoJson=' + jsContent+';');
+
+    const geojson = parser.decode(encodedGeoJson)
+    fs.writeFileSync(outputGeoJsonFile, JSON.stringify(geojson));
+
+  });
+}
+
 
 module.exports = {
   compress: geoJsonToCompressedJs,
   inspect: geoJsonListProperties,
   rename: geoJsonRenameAProperty,
-  merge: geoJsonMergeTwoPropertiesAsOne
+  merge: geoJsonMergeTwoPropertiesAsOne,
+  decompress: jsToGeoJson
 }

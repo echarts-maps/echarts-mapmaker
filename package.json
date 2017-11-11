@@ -8,6 +8,7 @@
   "bin": {
     "compress": "./src/compress.js",
     "property": "./src/property.js"
+    "decompress": "./src/decompress.js",
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,6 @@
   },
   "homepage": "https://github.com/chfw/echarts-mapmaker#readme",
   "dependencies": {
-    "commander": "^2.11.0"
+    "commander": "^2.11.0",
   }
 }

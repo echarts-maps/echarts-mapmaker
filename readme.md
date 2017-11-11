@@ -6,7 +6,7 @@ Makes custom geomaps for echarts presentation. It takes a subset of [echarts-map
 
 ### compress
 
-Compress any un-compressed gejson as js file.
+Compress any un-compressed geojson as js file.
 
 ```
 Usage: compress [options] <geojson> <js> <mapRegistryName>
@@ -22,6 +22,20 @@ where importantly `mapRegistryName` is the name to be called in your echarts scr
 Example commands
 
 compress [world.json](https://github.com/ecomfe/echarts/blob/master/map/json/world.json) world.js world
+
+### decompress
+
+Decompress any compressed js file back to geojson
+
+```
+
+Usage: decompress <js> <geojson>
+
+Options:
+
+  -h, --help  output usage information
+```
+
 
 ### property
 
