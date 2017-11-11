@@ -56,3 +56,8 @@ Options:
 ## License
 
 MIT
+
+## Credit
+
+1. compress.js comes from echarts-map-tool.
+1. parseGeoJson.js comes from echarts.js.
