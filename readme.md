@@ -53,6 +53,32 @@ Options:
   -h, --help                                      output usage information
 ```
 
+### merge
+
+Insert the first feature of a geojson into the first file.
+
+```
+Usage: merge [options] <geojson> <geojsonToBeMerged>
+
+
+Options:
+
+  -h, --help  output usage information
+```
+
+### shaper2echarts
+
+Convert [mapshaper](https://github.com/mbloch/mapshaper) dissovled geojson files into echarts map file.
+
+```
+Usage: shaper2echarts [options] <geojson> <geojson4echarts> <name>
+
+
+Options:
+
+  -h, --help  output usage information
+```
+
 ## License
 
 MIT

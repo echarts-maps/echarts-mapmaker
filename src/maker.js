@@ -74,12 +74,6 @@ var geoJsonMergeTwoPropertiesAsOne = (jsonFile, propertyA, propertyB, newPropert
   });
 };
 
-//geojson对象
-function Geojson() {
-    this.type  = "FeatureCollection";
-    this.features =[];
-}
-
 function jsToGeoJson(jsFile, outputGeoJsonFile){
 /*
   var fakeEcharts = () => {
@@ -113,8 +107,8 @@ function jsToGeoJson(jsFile, outputGeoJsonFile){
     }
     const heading = tokens[0];
     var jsContent = tokens[1];
-    if(heading.indexOf('!function(A,B)') !== -1){
-      const endregx = /\)\:void D/;
+    if(heading.indexOf('!function(') !== -1){
+      const endregx = /\)\:/;
       var subtokens = jsContent.split(endregx);
       jsContent = subtokens[0];
     }else{
