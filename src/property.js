@@ -21,7 +21,7 @@ program
       var propertyA = args[0];
       var propertyB = args[1];
       var newProperty = args[2];
-      maker.merge(geojson, propertyA, propertyB, newProperty);
+      maker.mergeProperty(geojson, propertyA, propertyB, newProperty);
     }
   })
   .parse(process.argv);
