@@ -150,6 +150,6 @@ module.exports = {
   inspect: geoJsonListProperties,
   rename: geoJsonRenameAProperty,
   mergeProperty: geoJsonMergeTwoPropertiesAsOne,
-  merge: merge.
+  merge: merge,
   decompress: jsToGeoJson
 }
