@@ -6,19 +6,14 @@ const parser = require('./parseGeoJson');
 
 var geoJsonToCompressedJs = (jsonFile, jsFile, registryName) => {
 
-  fs.readFile(jsonFile, 'utf8', function (err, data) {
-    if(err) throw err;
+  data = fs.readFileSync(jsonFile, 'utf8');
 
-    var geojson = JSON.parse(data);
+  var geojson = JSON.parse(data);
 
-    if(!geojson.UTF8Encoding){
-      mapTool.compress(geojson);
-    }
-    fs.writeFile(jsFile, mapTool.makeJs(geojson, registryName), function(err){
-      if (err) throw err;
-    });
-
-  });
+  if(!geojson.UTF8Encoding){
+    mapTool.compress(geojson);
+  }
+  fs.writeFileSync(jsFile, mapTool.makeJs(geojson, registryName))
 
 };
 
@@ -139,7 +134,7 @@ function merge(geojson, geojsonToBeMerged){
       var child = JSON.parse(data2);
 
       parent.features.push(child.features[0])
-      fs.writeFileSync('merged_'+geojson, JSON.stringify(parent));
+      fs.writeFileSync('merged_'+path.basename(geojson), JSON.stringify(parent));
     });
   })
 }         
