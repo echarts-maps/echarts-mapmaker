@@ -102,22 +102,28 @@ function jsToGeoJson(jsFile, outputGeoJsonFile){
     const regx = /registerMap\(\".*?\"\,/;
     const suffix = ");}));";
     var tokens = data.split(regx);
+    var geojson;
     if(tokens.length !== 2){
-      throw new Error('Invalid js file.')
-    }
-    const heading = tokens[0];
-    var jsContent = tokens[1];
-    if(heading.indexOf('!function(') !== -1){
-      const endregx = /\)\:/;
-      var subtokens = jsContent.split(endregx);
-      jsContent = subtokens[0];
+      try{
+        geojson = JSON.parse(data);
+        geojson = parser.decode(geojson);
+      }catch(e){
+        throw new Error('Invalid js file.')
+      }
     }else{
-      throw new Error('Cannot handle js file');
+      const heading = tokens[0];
+      var jsContent = tokens[1];
+      if(heading.indexOf('!function(') !== -1){
+        const endregx = /\)\:/;
+        var subtokens = jsContent.split(endregx);
+        jsContent = subtokens[0];
+      }else{
+        throw new Error('Cannot handle js file');
+      }
+
+      eval('var encodedGeoJson=' + jsContent+';');
+      geojson = parser.decode(encodedGeoJson)
     }
-
-    eval('var encodedGeoJson=' + jsContent+';');
-
-    const geojson = parser.decode(encodedGeoJson)
     fs.writeFileSync(outputGeoJsonFile, JSON.stringify(geojson));
 
   });
