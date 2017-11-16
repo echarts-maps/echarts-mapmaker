@@ -4,8 +4,8 @@ var program = require('commander');
 const maker = require('./maker');
 
 program
-  .arguments('<geojson> <js> <mapRegistryName>')
-  .action(function(geojson, js, mapRegistryName){
-    maker.compress(geojson, js, mapRegistryName);
+  .arguments('<geojson> <output>')
+  .action(function(geojson, output){
+    maker.compress(geojson, output);
   })
   .parse(process.argv);
