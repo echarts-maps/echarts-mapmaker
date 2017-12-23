@@ -1,11 +1,12 @@
 {
   "name": "echarts-mapmaker",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Make maps for echarts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
+    "makejs": "./src/makejs.js",
     "compress": "./src/compress.js",
     "property": "./src/property.js",
     "decompress": "./src/decompress.js",

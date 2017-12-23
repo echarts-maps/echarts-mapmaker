@@ -1,6 +1,6 @@
 # Change log
 
-## 1.0.6 - 23.12.2017
+## 1.0.7 - 23.12.2017
 
 1. old compress becomes makejs
 2. new compress does compression only
