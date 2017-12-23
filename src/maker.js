@@ -138,18 +138,13 @@ function jsToGeoJson(jsFile, outputGeoJsonFile){
 }
 
 function merge(geojson, geojsonToBeMerged){
-  fs.readFile(geojson, 'utf8', function (err, data) {
-    if(err)throw err;
-    fs.readFile(geojsonToBeMerged, 'utf8', function(err2, data2){
-      if(err2) throw err2;
-      
-      var parent = JSON.parse(data);
-      var child = JSON.parse(data2);
+  const data = fs.readFileSync(geojson, 'utf8');
+  const data2 = fs.readFile(geojsonToBeMerged, 'utf8');
+  var parent = JSON.parse(data);
+  var child = JSON.parse(data2);
 
-      parent.features.push(child.features[0])
-      fs.writeFileSync('merged_'+path.basename(geojson), JSON.stringify(parent));
-    });
-  })
+  parent.features.push(child.features[0])
+  fs.writeFileSync('merged_'+path.basename(geojson), JSON.stringify(parent));
 }         
 
 
