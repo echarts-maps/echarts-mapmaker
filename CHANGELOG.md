@@ -1,5 +1,10 @@
 # Change log
 
+## 1.0.6 - 23.12.2017
+
+1. old compress becomes makejs
+2. new compress does compression only
+
 ## 1.0.4 - 24.09.2017
 
 1. decomporess command is delivered

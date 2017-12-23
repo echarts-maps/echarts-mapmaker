@@ -4,12 +4,12 @@ Makes custom geomaps for echarts presentation. It takes a subset of [echarts-map
 
 ## Commands
 
-### compress
+### makejs
 
 Compress any un-compressed geojson as js file.
 
 ```
-Usage: compress [options] <geojson> <js> <mapRegistryName>
+Usage: makejs [options] <geojson> <js> <mapRegistryName>
 
 
 Options:
@@ -21,7 +21,24 @@ where importantly `mapRegistryName` is the name to be called in your echarts scr
 
 Example commands
 
-compress [world.json](https://github.com/ecomfe/echarts/blob/master/map/json/world.json) world.js world
+makejs [world.json](https://github.com/ecomfe/echarts/blob/master/map/json/world.json) world.js world
+
+### compress
+
+Compress any un-compressed geojson as js file.
+
+```
+Usage: compress [options] <geojson> <output>
+
+
+Options:
+
+  -h, --help  output usage information
+```
+
+Example commands
+
+compress [world.json](https://github.com/ecomfe/echarts/blob/master/map/json/world.json) world.json
 
 ### decompress
 
