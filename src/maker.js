@@ -139,7 +139,7 @@ function jsToGeoJson(jsFile, outputGeoJsonFile){
 
 function merge(geojson, geojsonToBeMerged){
   const data = fs.readFileSync(geojson, 'utf8');
-  const data2 = fs.readFile(geojsonToBeMerged, 'utf8');
+  const data2 = fs.readFileSync(geojsonToBeMerged, 'utf8');
   var parent = JSON.parse(data);
   var child = JSON.parse(data2);
 
