@@ -1,6 +1,6 @@
 {
   "name": "echarts-mapmaker",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Make maps for echarts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
