@@ -6,7 +6,7 @@
 2. updated merge function to remove existing feature if the feature to be
    merged exists already
 
-## 1.0.9 - 23.12.2017
+## 1.0.9 - 24.12.2017
 
 1. old compress becomes makejs
 2. new compress does compression only
