@@ -144,10 +144,12 @@ function merge(geojson, geojsonToBeMerged){
   var parent = JSON.parse(data);
   var child = JSON.parse(data2);
 
-  parent.features = parent.features.filter((feature)=>{
-    return feature.properties.name!==child.features[0].properties.name;
+  child.features.forEach(function(feature){
+    parent.features = parent.features.filter((featurex)=>{
+      return featurex.properties.name!==feature.properties.name;
+    });
+    parent.features.push(feature);
   });
-  parent.features.push(child.features[0])
   fs.writeFileSync('merged_'+path.basename(geojson), JSON.stringify(parent));
 }         
 

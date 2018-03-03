@@ -72,7 +72,7 @@ Options:
 
 ### merge
 
-Insert the first feature of a geojson into the first file.
+Merge second geojson into the first file.
 
 ```
 Usage: merge [options] <geojson> <geojsonToBeMerged>
