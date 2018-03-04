@@ -1,5 +1,9 @@
 # Change log
 
+## 1.0.11 - 4.3.2018
+
+1. Updated merge command to merge all of the 2nd geojson to the first one.
+
 ## 1.0.10 - 28.12.2017
 
 1. added the capability to cut a hole from an existing feature from another one.
