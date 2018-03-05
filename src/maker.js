@@ -153,6 +153,44 @@ function merge(geojson, geojsonToBeMerged){
   fs.writeFileSync('merged_'+path.basename(geojson), JSON.stringify(parent));
 }         
 
+//geojson对象
+function Geojson() {
+    this.type  = "FeatureCollection";
+    this.features =[];
+}
+
+
+function transform(geojson, geojson4echarts, mapName){
+  fs.readFile(geojson, 'utf8', function (err, data) {
+    if(err)throw err;
+    var shaper = JSON.parse(data);
+    var echartsJson = new Geojson();
+    echartsJson.features = [
+      {
+        "type": "Feature",
+        "properties": {
+          "name": mapName
+        },
+        "geometry": shaper.geometries[0]
+      }
+    ];
+
+    fs.writeFileSync(geojson4echarts, JSON.stringify(echartsJson));
+  })
+}
+
+function splitAllFeaturesAsGeojson(geojsonFile) {
+  const data = fs.readFileSync(geojsonFile);
+  const geojson = JSON.parse(data);
+
+  geojson.features.forEach(function(feature){
+    const subGeo = new Geojson();
+    subGeo.features = [feature];
+    console.log(feature.properties.name);
+    fs.writeFileSync(feature.properties.name + '.geojson', JSON.stringify(subGeo));
+  })
+  
+}
 
 module.exports = {
   compress: geoJsonToCompressed,
@@ -163,5 +201,7 @@ module.exports = {
   decompress: jsToGeoJson,
   makeJs: geoJsonToCompressedJs,
   remove: removeAFeature,
-  cut: cutAHoleInFeatureAWithFB
+  cut: cutAHoleInFeatureAWithFB,
+  transform: transform,
+  split: splitAllFeaturesAsGeojson
 }

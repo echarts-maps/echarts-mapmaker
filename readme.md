@@ -83,6 +83,19 @@ Options:
   -h, --help  output usage information
 ```
 
+### split
+
+Split the geojson into individual independent geojson files
+
+```
+Usage: split [options] <geojson>
+
+
+Options:
+
+  -h, --help  output usage information
+```
+
 ### shaper2echarts
 
 Convert [mapshaper](https://github.com/mbloch/mapshaper) dissovled geojson files into echarts map file.
