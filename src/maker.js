@@ -1,6 +1,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
+const pinyin = require('pinyin');
 const mapTool = require('./map-tool');
 const parser = require('./parseGeoJson');
 
@@ -30,7 +31,25 @@ var cutAHoleInFeatureAWithFB = (jsonFile, featureA, featureB) => {
   fs.writeFileSync("cut_" + jsonFile, JSON.stringify(geojson));
 };
 
-var geoJsonToCompressed = (jsonFile, jsFile, registryName) => {
+/**
+  * Automic operation, both geojson file should have only one feature
+ */
+var cutAHoleInGeojsonByOther = (jsonFile, jsonFile2) => {
+  data = fs.readFileSync(jsonFile, 'utf8');
+
+  var geojson = JSON.parse(data);
+
+  data2 = fs.readFileSync(jsonFile2, 'utf8');
+
+  var second = JSON.parse(data2);
+  // https://stackoverflow.com/questions/43645172/geojson-multipolygon-with-multiple-holes
+  
+  geojson.features[0].geometry.coordinates.push(second.features[0].geometry.coordinates[0]);
+
+  fs.writeFileSync("cut_" + jsonFile, JSON.stringify(geojson));
+};
+
+var geoJsonToCompressed = (jsonFile, jsFile) => {
 
   data = fs.readFileSync(jsonFile, 'utf8');
 
@@ -110,7 +129,7 @@ var geoJsonMergeTwoPropertiesAsOne = (jsonFile, propertyA, propertyB, newPropert
 
 function jsToGeoJson(jsFile, outputGeoJsonFile){
   data = fs.readFileSync(jsFile, 'utf8');
-  const regx = /registerMap\(\".*?\"\,/;
+  const regx = /registerMap\([\"\'].*?[\"\']\,/;
   const suffix = ");}));";
   var tokens = data.split(regx);
   var geojson;
@@ -119,6 +138,8 @@ function jsToGeoJson(jsFile, outputGeoJsonFile){
       geojson = JSON.parse(data);
       geojson = parser.decode(geojson);
     }catch(e){
+      console.log(tokens.length);
+      console.log(e);
       throw new Error('Invalid js file.')
     }
   }else{
@@ -179,17 +200,56 @@ function transform(geojson, geojson4echarts, mapName){
   })
 }
 
-function splitAllFeaturesAsGeojson(geojsonFile) {
+function splitAllFeaturesAsGeojson(geojsonFile, folder) {
   const data = fs.readFileSync(geojsonFile);
   const geojson = JSON.parse(data);
+  const flag = geojson.UTF8Encoding;
 
   geojson.features.forEach(function(feature){
     const subGeo = new Geojson();
     subGeo.features = [feature];
-    console.log(feature.properties.name);
-    fs.writeFileSync(feature.properties.name + '.geojson', JSON.stringify(subGeo));
-  })
-  
+    var targetFile = feature.properties.name + '.geojson';
+    if(flag){
+      subGeo.UTF8Encoding = flag;
+    }
+    if (folder){
+	  targetFile = path.join(folder, targetFile);
+    }
+    fs.writeFileSync(targetFile, JSON.stringify(subGeo));
+  })  
+}
+
+function splitAllFeaturesAsJs(geojsonFile, folder) {
+  const data = fs.readFileSync(geojsonFile);
+  const geojson = JSON.parse(data);
+  if(!geojson.UTF8Encoding){
+      mapTool.compress(geojson);
+  }
+
+  var names = [];
+
+  geojson.features.forEach(function(feature){
+	const subGeo = new Geojson();
+	subGeo.features = [feature];
+	subGeo.UTF8Encoding = true;
+	var name = feature.properties.name;
+	const py_name = getPinyin(name);
+	var targetFile = py_name + '.js';
+	if(folder){
+	  targetFile = path.join(folder, targetFile);
+	}
+	names.push([name, targetFile]);
+	fs.writeFileSync(targetFile, mapTool.makeJs(subGeo, name));
+  });
+  return names;
+}
+
+
+function getPinyin(Chinese_words){
+    const py = pinyin(Chinese_words, {
+	    style: pinyin.STYLE_TONE2
+	});
+    return py.join('_');
 }
 
 module.exports = {
@@ -202,6 +262,8 @@ module.exports = {
   makeJs: geoJsonToCompressedJs,
   remove: removeAFeature,
   cut: cutAHoleInFeatureAWithFB,
+  cutByFile: cutAHoleInGeojsonByOther,
   transform: transform,
-  split: splitAllFeaturesAsGeojson
+  splitAsGeojson: splitAllFeaturesAsGeojson,
+  splitAsJs: splitAllFeaturesAsJs
 }

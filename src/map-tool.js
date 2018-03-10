@@ -80,6 +80,13 @@ function encode(val, prev){
 }
 
 var specialArea = {
+  中国七大区: {
+    '南海诸岛': {              // 把海南诸岛加移到中国台湾右边
+      left: 126,
+      top: 20,
+      width: 10
+    }
+  },
   '美国': {
     Alaska: {              // 把阿拉斯加移到美国主大陆左下方
       left: -131,
