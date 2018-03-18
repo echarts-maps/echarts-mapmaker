@@ -149,6 +149,10 @@ function jsToGeoJson(jsFile, outputGeoJsonFile){
       const endregx = /\)\:/;
       var subtokens = jsContent.split(endregx);
       jsContent = subtokens[0];
+    }if(heading.startsWith('(function')){
+      const endregx = /\)\;/;
+      var subtokens = jsContent.split(endregx);
+      jsContent = subtokens[0];
     }else{
       throw new Error('Cannot handle js file');
     }
