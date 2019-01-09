@@ -1,5 +1,9 @@
 # Change log
 
+## 1.0.12 - 9.1.2019
+
+1. More commands: transform, remove, merge a property.
+
 ## 1.0.11 - 4.3.2018
 
 1. Updated merge command to merge all of the 2nd geojson to the first one.
