@@ -250,6 +250,13 @@ function splitAllFeaturesAsJs(geojsonFile, folder) {
   return names;
 }
 
+function decompressGeojson(geojsonfile, outputGeoJsonFile){
+  const data = fs.readFileSync(geojsonfile, 'utf8');
+  const geojson = JSON.parse(data);
+  const decoded = parser.decode(geojson);
+  fs.writeFileSync(outputGeoJsonFile, JSON.stringify(decoded))
+}
+
 
 function getPinyin(Chinese_words){
     const py = pinyin(Chinese_words, {
@@ -265,6 +272,7 @@ module.exports = {
   mergeProperty: geoJsonMergeTwoPropertiesAsOne,
   merge: merge,
   decompress: jsToGeoJson,
+  decode: decompressGeojson,
   makeJs: geoJsonToCompressedJs,
   remove: removeAFeature,
   cut: cutAHoleInFeatureAWithFB,

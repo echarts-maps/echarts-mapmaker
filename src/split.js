@@ -6,6 +6,6 @@ const maker = require('./maker');
 program
   .arguments('<geojson>')
   .action(function(geojson){
-    maker.split(geojson);
+    maker.splitAsGeojson(geojson);
   })
   .parse(process.argv);
