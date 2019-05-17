@@ -14,7 +14,7 @@ var removeAFeature = (jsonFile, featureName) => {
     return feature.properties.name !== featureName;
   });
 
-  fs.writeFileSync("removed_"+jsFile, JSON.stringify(geojson));
+  fs.writeFileSync("removed_"+path.basename(jsonFile), JSON.stringify(geojson));
 
 };
 
