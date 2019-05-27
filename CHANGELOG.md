@@ -1,6 +1,6 @@
 # Change log
 
-## 1.0.13 - 27.5.2019
+## 1.0.14 - 27.5.2019
 
 1. fix 'split', 'remove' commands, where were not working
 1. bug fix decompress command so that it can decompress minified js file
