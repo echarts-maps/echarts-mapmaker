@@ -96,6 +96,20 @@ Options:
   -h, --help  output usage information
 ```
 
+### decode
+
+Decode utf-8 encode geojson file
+
+```
+
+  Usage: decode [options] <geojson> <output_geojson>
+
+
+  Options:
+
+    -h, --help  output usage information
+```
+
 ### shaper2echarts
 
 Convert [mapshaper](https://github.com/mbloch/mapshaper) dissovled geojson files into echarts map file.

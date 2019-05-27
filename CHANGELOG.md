@@ -1,5 +1,11 @@
 # Change log
 
+## 1.0.13 - 27.5.2019
+
+1. fix 'split', 'remove' commands, where were not working
+1. bug fix decompress command so that it can decompress minified js file
+1. new 'decode' command to decode utf-8 encoding geojson file
+
 ## 1.0.12 - 9.1.2019
 
 1. More commands: transform, remove, merge a property.
