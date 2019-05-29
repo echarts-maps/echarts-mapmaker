@@ -11,6 +11,8 @@
     "property": "./src/property.js",
     "decompress": "./src/decompress.js",
     "merge": "./src/merge.js",
+    "split": "./src/split.js",
+    "decode": "./src/decode.js",
     "shaper2echarts": "./src/shaper2echarts.js"
   },
   "repository": {
