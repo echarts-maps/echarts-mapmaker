@@ -132,6 +132,8 @@ Options:
 
 MIT
 
+This projects is NOT associated with official Apache ECharts (incubating) project and is independently maintained by [@chfw](https://github.com/chfw).
+
 ## Credit
 
 1. compress.js comes from echarts-map-tool.
