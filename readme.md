@@ -2,6 +2,11 @@
 
 Makes custom geomaps for echarts presentation. It takes a subset of [echarts-map-tool](https://github.com/ecomfe/echarts-map-tool) as core map editing utility.
 
+## Tutorials
+
+:book:[echarts geomapping book](https://echarts-maps.github.io/echarts-geomapping-book-en/)
+:secret:[echarts 工匠秘籍](https://echarts-maps.github.io/echarts-geomapping-book-zh/)
+
 ## Commands
 
 ### makejs
@@ -126,6 +131,8 @@ Options:
 ## License
 
 MIT
+
+This projects is NOT associated with official Apache ECharts (incubating) project and is independently maintained by [@chfw](https://github.com/chfw).
 
 ## Credit
 

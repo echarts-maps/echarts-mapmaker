@@ -1,6 +1,6 @@
 {
   "name": "echarts-mapmaker",
-  "version": "1.0.14",
+  "version": "1.1.0",
   "description": "Make maps for echarts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,8 @@
     "property": "./src/property.js",
     "decompress": "./src/decompress.js",
     "merge": "./src/merge.js",
+    "split": "./src/split.js",
+    "decode": "./src/decode.js",
     "shaper2echarts": "./src/shaper2echarts.js"
   },
   "repository": {
