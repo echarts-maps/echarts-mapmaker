@@ -1,5 +1,9 @@
 # Change log
 
+## 1.1.0 - 21.12.2025
+
+1. fix maker.js
+
 ## 1.0.14 - 27.5.2019
 
 1. fix 'split', 'remove' commands, where were not working
