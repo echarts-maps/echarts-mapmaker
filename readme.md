@@ -58,7 +58,6 @@ Options:
   -h, --help  output usage information
 ```
 
-
 ### property
 
 Manage the property of a geojson file.
